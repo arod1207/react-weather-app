@@ -10,12 +10,14 @@ function Search() {
     const [city, setCity] = useState('');
     const [data, setData] = useState([]);
 
+    const WEATHER_API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
+
     const handleSearch = (e) => {
         e.preventDefault();
 
         axios
             .get(
-                `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=48d3a28352214078788608a2fa720128`
+                `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${WEATHER_API_KEY}`
             )
             .then((res) => {
                 console.log('🔥', res.data);
