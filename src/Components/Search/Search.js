@@ -69,6 +69,8 @@ function Search() {
                     icon={data.icon}
                 />
             )}
+
+            {data.temp < 60 ? <h1>It's fucking cold</h1> : null}
         </div>
     );
 }
