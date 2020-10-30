@@ -30,7 +30,7 @@ function Search() {
 
         axios
             .get(
-                `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${WEATHER_API_KEY}`
+                `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${WEATHER_API_KEY}`
             )
             .then((res) => {
                 console.log('🔥', res.data);
