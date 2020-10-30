@@ -19,7 +19,7 @@ function Search() {
         src: [Sound],
     });
 
-    const WEATHER_API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
+    // const WEATHER_API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 
     const handleSearch = (e) => {
         e.preventDefault();
@@ -30,7 +30,7 @@ function Search() {
 
         axios
             .get(
-                `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${WEATHER_API_KEY}`
+                `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
             )
             .then((res) => {
                 console.log('🔥', res.data);
