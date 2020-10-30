@@ -4,6 +4,8 @@ import axios from 'axios';
 
 import Weather from '../Weather/Weather';
 
+import { TextField } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import './Search.css';
 
 function Search() {
@@ -14,7 +16,6 @@ function Search() {
 
     const handleSearch = (e) => {
         e.preventDefault();
-
         axios
             .get(
                 `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${WEATHER_API_KEY}`
@@ -30,39 +31,43 @@ function Search() {
                     description: res.data.weather[0].description,
                     icon: res.data.weather[0].icon,
                 });
-
                 setCity('');
             });
     };
 
     return (
-        <>
+        <div className="search">
             <div className="search__searchbar">
                 <form>
-                    <input
+                    <TextField
+                        variant="outlined"
                         type="text"
                         placeholder="Enter City"
                         value={city}
                         onChange={(e) => setCity(e.target.value)}
                     />
-                    <button type="submit" onClick={handleSearch}>
-                        Search
-                    </button>
+                    <div className="search__button">
+                        <Button
+                            color="primary"
+                            variant="contained"
+                            type="submit"
+                            onClick={handleSearch}
+                        >
+                            Search
+                        </Button>
+                    </div>
                 </form>
             </div>
-
-            <div className="weather">
-                <Weather
-                    city={data.city}
-                    temp={data.temp}
-                    feels_like={data.feels_like}
-                    wind={data.wind}
-                    weather={data.weather}
-                    description={data.description}
-                    icon={data.icon}
-                />
-            </div>
-        </>
+            <Weather
+                city={data.city}
+                temp={data.temp}
+                feels_like={data.feels_like}
+                wind={data.wind}
+                weather={data.weather}
+                description={data.description}
+                icon={data.icon}
+            />
+        </div>
     );
 }
 

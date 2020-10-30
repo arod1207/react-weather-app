@@ -1,8 +1,23 @@
-.search__searchbar {
+.search {
     display: flex;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
+    height: 100vh;
+    border: 1px solid red;
+}
+
+.MuiInputBase-root {
     text-align: center;
-    border: 3px solid red;
-    height: 20vh;
+    width: 500px;
+}
+
+input.MuiInputBase-input.MuiOutlinedInput-input {
+    text-align: center;
+    font-size: 2em;
+}
+
+.search__button {
+    text-align: center;
+    margin: 5px;
 }
