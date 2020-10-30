@@ -58,15 +58,17 @@ function Search() {
                     </div>
                 </form>
             </div>
-            <Weather
-                city={data.city}
-                temp={data.temp}
-                feels_like={data.feels_like}
-                wind={data.wind}
-                weather={data.weather}
-                description={data.description}
-                icon={data.icon}
-            />
+            {!data.city ? null : (
+                <Weather
+                    city={data.city}
+                    temp={data.temp}
+                    feels_like={data.feels_like}
+                    wind={data.wind}
+                    weather={data.weather}
+                    description={data.description}
+                    icon={data.icon}
+                />
+            )}
         </div>
     );
 }

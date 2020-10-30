@@ -1,13 +1,22 @@
 .weather {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
     border-radius: 15px;
     padding: 20px;
+    margin: 5px;
     background-image: linear-gradient(
         to bottom right,
         rgb(0, 195, 255),
         rgb(183, 0, 255)
     );
-    font-size: 1em;
+}
+
+.option {
+    padding: 5px;
+    font-size: 2em;
+}
+
+.weather__image > img {
+    width: 75px;
 }
