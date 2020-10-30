@@ -20,3 +20,10 @@ input.MuiInputBase-input.MuiOutlinedInput-input {
     text-align: center;
     margin: 5px;
 }
+
+@media screen and (max-width: 700px) {
+    .MuiInputBase-root {
+        text-align: center;
+        width: 300px;
+    }
+}
