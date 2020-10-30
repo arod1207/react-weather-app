@@ -52,19 +52,23 @@ function Search() {
                     <TextField
                         variant="outlined"
                         type="text"
-                        placeholder="Enter City"
+                        placeholder="City..."
                         value={city}
                         onChange={(e) => setCity(e.target.value)}
                     />
                     <div className="search__button">
-                        <Button
-                            color="primary"
-                            variant="contained"
-                            type="submit"
-                            onClick={handleSearch}
-                        >
-                            Search
-                        </Button>
+                        {!city ? (
+                            <h1>Enter a City</h1>
+                        ) : (
+                            <Button
+                                color="primary"
+                                variant="contained"
+                                type="submit"
+                                onClick={handleSearch}
+                            >
+                                Search
+                            </Button>
+                        )}
                     </div>
                 </form>
             </div>
