@@ -14,6 +14,9 @@ import './Search.css';
 function Search() {
     const [city, setCity] = useState('');
     const [data, setData] = useState([]);
+    const [noData, setNoData] = useState('');
+
+    console.log('‼️', noData);
 
     const sound = new Howl({
         src: [Sound],
@@ -41,8 +44,13 @@ function Search() {
                     description: res.data.weather[0].description,
                     icon: res.data.weather[0].icon,
                 });
-                setCity('');
+            })
+            .catch(() => {
+                setNoData('City Not Found');
             });
+
+        setCity('');
+        setNoData('');
     };
 
     return (
@@ -69,6 +77,7 @@ function Search() {
                                 Search
                             </Button>
                         )}
+                        <h1 style={{ color: 'red' }}>{noData}</h1>
                     </div>
                 </form>
             </div>
