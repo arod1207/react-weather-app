@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import { Howl, Howler } from 'howler';
 
 import axios from 'axios';
 
 import Weather from '../Weather/Weather';
+
+import Sound from '../Audio/Sound.mp4';
 
 import { TextField } from '@material-ui/core';
 import { Button } from '@material-ui/core';
@@ -12,10 +15,19 @@ function Search() {
     const [city, setCity] = useState('');
     const [data, setData] = useState([]);
 
+    const sound = new Howl({
+        src: [Sound],
+    });
+
     const WEATHER_API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 
     const handleSearch = (e) => {
         e.preventDefault();
+
+        sound.play();
+
+        Howler.volume(0.5);
+
         axios
             .get(
                 `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${WEATHER_API_KEY}`
