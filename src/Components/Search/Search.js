@@ -25,10 +25,6 @@ function Search() {
     const handleSearch = (e) => {
         e.preventDefault();
 
-        sound.play();
-
-        Howler.volume(0.5);
-
         axios
             .get(
                 `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
@@ -44,6 +40,9 @@ function Search() {
                     description: res.data.weather[0].description,
                     icon: res.data.weather[0].icon,
                 });
+                sound.play();
+
+                Howler.volume(1.0);
             })
             .catch(() => {
                 setNoData('City Not Found');
@@ -93,7 +92,13 @@ function Search() {
                 />
             )}
 
-            {data.temp < 60 ? <h1>It's fucking cold</h1> : null}
+            {data.temp < 60 ? (
+                <h1 style={{ fontSize: '3em', color: 'Red' }}>
+                    It's fucking cold
+                </h1>
+            ) : data.temp > 70 ? (
+                <h1 style={{ fontSize: '3em', color: 'Red' }}>Light The Pit</h1>
+            ) : null}
         </div>
     );
 }
