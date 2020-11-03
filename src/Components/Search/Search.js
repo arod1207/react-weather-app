@@ -45,8 +45,6 @@ function Search() {
         setNoData('');
     };
 
-    console.log(forcast);
-
     return (
         <div className="search">
             <div className="search__searchbar">
@@ -60,7 +58,7 @@ function Search() {
                     />
                     <div className="search__button">
                         {!city ? (
-                            <h1>Enter a City</h1>
+                            <h1>Enter a City or Zip Code</h1>
                         ) : (
                             <Button
                                 color="primary"
@@ -75,26 +73,35 @@ function Search() {
                     </div>
                 </form>
             </div>
-            <Weather
-                city={data.city}
-                temp={data.cTemp}
-                feelsLike={data.feelsLike}
-                wind={data.wind}
-                text={data.text}
-                icon={data.icon}
-                updatedAt={data.updatedAt}
-            />
-            {forcast.map((day) => (
-                <Forecast
-                    key={day.date}
-                    date={day.date}
-                    text={day.day.condition.text}
-                    icon={day.day.condition.icon}
-                    rain={day.day.daily_chance_of_rain}
-                    maxTemp={day.day.maxtemp_f}
-                    minTemp={day.day.mintemp_f}
+            {!data.city ? (
+                ''
+            ) : (
+                <Weather
+                    city={data.city}
+                    temp={data.cTemp}
+                    feelsLike={data.feelsLike}
+                    wind={data.wind}
+                    text={data.text}
+                    icon={data.icon}
+                    updatedAt={data.updatedAt}
+                    region={data.region}
                 />
-            ))}
+            )}
+            <div className="forecast">
+                {!forcast
+                    ? null
+                    : forcast.map((day) => (
+                          <Forecast
+                              key={day.date}
+                              date={day.date}
+                              text={day.day.condition.text}
+                              icon={day.day.condition.icon}
+                              rain={day.day.daily_chance_of_rain}
+                              maxTemp={day.day.maxtemp_f}
+                              minTemp={day.day.mintemp_f}
+                          />
+                      ))}
+            </div>
         </div>
     );
 }

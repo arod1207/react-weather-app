@@ -1,0 +1,21 @@
+.forecast {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    margin: 20px;
+    text-align: center;
+}
+
+.forecast__box {
+    padding: 20px;
+    background-image: linear-gradient(
+        to bottom right,
+        rgb(0, 195, 255),
+        rgb(183, 0, 255)
+    );
+    border-radius: 10px;
+}
+
+.forecast__options {
+    padding: 5px;
+}
