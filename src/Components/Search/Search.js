@@ -20,7 +20,7 @@ function Search() {
 
         axios
             .get(
-                `http://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_WEATHER_API_KEY}&q=${city}&days=7`
+                `https://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_WEATHER_API_KEY}&q=${city}&days=7`
             )
             .then((res) => {
                 console.log('🔥', res.data);
