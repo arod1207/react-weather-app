@@ -19,3 +19,16 @@
 .forecast__options {
     padding: 5px;
 }
+
+@media screen and (max-width: 700px) {
+    .forecast {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .forecast__box {
+        width: 275px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+}

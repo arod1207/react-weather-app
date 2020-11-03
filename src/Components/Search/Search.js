@@ -58,7 +58,7 @@ function Search() {
                     />
                     <div className="search__button">
                         {!city ? (
-                            <h1>Enter a City or Zip Code</h1>
+                            <h2>Enter a City or Zip Code</h2>
                         ) : (
                             <Button
                                 color="primary"
