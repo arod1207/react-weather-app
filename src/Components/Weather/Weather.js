@@ -2,23 +2,20 @@ import React from 'react';
 
 import './Weather.css';
 
-function Weather({ city, temp, feels_like, wind, weather, description, icon }) {
+function Weather({ city, temp, feelsLike, wind, text, icon, updatedAt }) {
     return (
         <div className="weather">
             <div className="weather__city option">{city}</div>
             <div className="weather__temp option">Currently: °{temp}</div>
             <div className="weather__feelsLike option">
-                Feels Like: °{feels_like}
+                Feels Like: °{feelsLike}
             </div>
             <div className="weather__wind option">Wind: {wind} mph</div>
-            <div className="weather__weather option">{weather}</div>
-            <div className="weather__desc option">{description}</div>
+            <div className="weather__weather option">{text}</div>
             <div className="weather__image option">
-                <img
-                    src={`http://openweathermap.org/img/wn/${icon}.png`}
-                    alt=""
-                />
+                <img src={icon} alt="" />
             </div>
+            <div className="weather__updatedAt">{updatedAt}</div>
         </div>
     );
 }

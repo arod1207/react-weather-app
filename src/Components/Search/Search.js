@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 import Weather from '../Weather/Weather';
+import Forecast from '../Forcast/Forecast';
 
 import { TextField } from '@material-ui/core';
 import { Button } from '@material-ui/core';
@@ -11,6 +12,7 @@ import './Search.css';
 function Search() {
     const [city, setCity] = useState('');
     const [data, setData] = useState([]);
+    const [forcast, setForcast] = useState([]);
     const [noData, setNoData] = useState('');
 
     const handleSearch = (e) => {
@@ -18,21 +20,22 @@ function Search() {
 
         axios
             .get(
-                `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
+                `http://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_WEATHER_API_KEY}&q=${city}&days=7`
             )
             .then((res) => {
-                setData({
-                    city: res.data.name,
-                    temp: res.data.main.temp,
-                    feels_like: res.data.main.feels_like,
-                    wind: res.data.wind.speed,
-                    weather: res.data.weather[0].main,
-                    description: res.data.weather[0].description,
-                    icon: res.data.weather[0].icon,
-                });
-                sound.play();
+                console.log('🔥', res.data);
 
-                Howler.volume(1.0);
+                setData({
+                    city: res.data.location.name,
+                    region: res.data.location.region,
+                    cTemp: res.data.current.temp_f,
+                    feelsLike: res.data.current.feelslike_f,
+                    wind: res.data.current.wind_mph,
+                    text: res.data.current.condition.text,
+                    icon: res.data.current.condition.icon,
+                    updatedAt: res.data.current.last_updated,
+                });
+                setForcast(res.data.forecast.forecastday);
             })
             .catch(() => {
                 setNoData('City Not Found');
@@ -41,6 +44,8 @@ function Search() {
         setCity('');
         setNoData('');
     };
+
+    console.log(forcast);
 
     return (
         <div className="search">
@@ -70,17 +75,26 @@ function Search() {
                     </div>
                 </form>
             </div>
-            {!data.city ? null : (
-                <Weather
-                    city={data.city}
-                    temp={data.temp}
-                    feels_like={data.feels_like}
-                    wind={data.wind}
-                    weather={data.weather}
-                    description={data.description}
-                    icon={data.icon}
+            <Weather
+                city={data.city}
+                temp={data.cTemp}
+                feelsLike={data.feelsLike}
+                wind={data.wind}
+                text={data.text}
+                icon={data.icon}
+                updatedAt={data.updatedAt}
+            />
+            {forcast.map((day) => (
+                <Forecast
+                    key={day.date}
+                    date={day.date}
+                    text={day.day.condition.text}
+                    icon={day.day.condition.icon}
+                    rain={day.day.daily_chance_of_rain}
+                    maxTemp={day.day.maxtemp_f}
+                    minTemp={day.day.mintemp_f}
                 />
-            )}
+            ))}
         </div>
     );
 }
