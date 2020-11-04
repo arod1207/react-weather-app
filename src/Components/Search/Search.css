@@ -56,7 +56,7 @@ input.MuiInputBase-input.MuiOutlinedInput-input {
         width: 300px;
     }
     .search {
-        height: 100vh;
+        height: 100%;
         padding: 20px;
         text-align: center;
     }
