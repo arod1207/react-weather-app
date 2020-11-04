@@ -9,16 +9,21 @@
 .MuiInputBase-root {
     text-align: center;
     width: 500px;
+    border: 1px solid white;
 }
 
 input.MuiInputBase-input.MuiOutlinedInput-input {
     text-align: center;
     font-size: 2em;
+    color: white;
 }
 
 .search__button {
     text-align: center;
     margin: 5px;
+}
+.search__button > h2 {
+    color: white;
 }
 
 @media screen and (max-width: 480px) {
@@ -28,6 +33,30 @@ input.MuiInputBase-input.MuiOutlinedInput-input {
     }
     .search {
         height: 100%;
+        padding: 20px;
+        text-align: center;
+    }
+}
+
+@media screen and (min-width: 900px) {
+    .MuiInputBase-root {
+        text-align: center;
+        width: 300px;
+    }
+    .search {
+        height: 100%;
+        padding: 20px;
+        text-align: center;
+    }
+}
+
+@media screen and (min-width: 2000px) {
+    .MuiInputBase-root {
+        text-align: center;
+        width: 300px;
+    }
+    .search {
+        height: 100vh;
         padding: 20px;
         text-align: center;
     }
