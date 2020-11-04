@@ -1,6 +1,6 @@
 import './App.css';
 
-import Sunset from './Videos/Sunset.mp4';
+import LightVid from './Videos/lightning.mp4';
 
 import Search from './Components/Search/Search';
 
@@ -9,7 +9,7 @@ function App() {
         <div className="app">
             <Search />
             <video className="skyvid" autoPlay loop muted>
-                <source src={Sunset} type="video/mp4" />
+                <source src={LightVid} type="video/mp4" />
             </video>
         </div>
     );
