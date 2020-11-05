@@ -17,7 +17,8 @@ body {
         height: 100%;
         background-image: url('./Images/landscape.png');
         background-size: auto;
-        max-width: 100%;
+        width: 100%;
+        background-attachment: scroll;
     }
 
     .skyvid {

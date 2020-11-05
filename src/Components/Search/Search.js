@@ -14,13 +14,50 @@ function Search() {
     const [data, setData] = useState([]);
     const [forcast, setForcast] = useState([]);
     const [noData, setNoData] = useState('');
+    const [lat, setLat] = useState('');
+    const [lon, setLon] = useState('');
+
+    const currentLocation = async (e) => {
+        e.preventDefault();
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(getPosition);
+        }
+        function getPosition(position) {
+            setLat(position.coords.latitude);
+            setLon(position.coords.longitude);
+        }
+
+        axios
+            .get(
+                `https://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_WEATHER_API_KEY}&q=${city}&q=${lat}&q=${lon}&days=7`
+            )
+            .then((res) => {
+                setData({
+                    city: res.data.location.name,
+                    region: res.data.location.region,
+                    cTemp: res.data.current.temp_f,
+                    feelsLike: res.data.current.feelslike_f,
+                    wind: res.data.current.wind_mph,
+                    text: res.data.current.condition.text,
+                    icon: res.data.current.condition.icon,
+                    updatedAt: res.data.current.last_updated,
+                });
+                setForcast(res.data.forecast.forecastday);
+            })
+            .catch(() => {
+                setNoData('City Not Found');
+            });
+
+        setCity('');
+        setNoData('');
+    };
 
     const handleSearch = (e) => {
         e.preventDefault();
 
         axios
             .get(
-                `https://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_WEATHER_API_KEY}&q=${city}&days=7`
+                `https://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_WEATHER_API_KEY}&q=${city}&q=${lat}&q=${lon}&days=7`
             )
             .then((res) => {
                 console.log('🔥', res.data);
@@ -69,6 +106,17 @@ function Search() {
                                 Search
                             </Button>
                         )}
+                        <div className="search__locationButton">
+                            <Button
+                                color="primary"
+                                variant="contained"
+                                type="submit"
+                                onClick={currentLocation}
+                            >
+                                Use Current Location
+                            </Button>
+                        </div>
+
                         <h1 style={{ color: 'red' }}>{noData}</h1>
                     </div>
                 </form>

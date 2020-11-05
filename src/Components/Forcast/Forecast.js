@@ -5,8 +5,6 @@ import moment from 'moment';
 import './Forecast.css';
 
 function Forcast({ date, text, icon, rain, maxTemp, minTemp }) {
-    console.log('💛', date);
-
     return (
         <div className="forecast">
             <div className="forecast__box">
