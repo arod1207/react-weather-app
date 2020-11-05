@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import axios from 'axios';
 
@@ -22,14 +22,14 @@ function Search() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(getPosition);
         }
-        function getPosition(position) {
-            setLat(position.coords.latitude);
-            setLon(position.coords.longitude);
+        async function getPosition(position) {
+            setLat(await position.coords.latitude);
+            setLon(await position.coords.longitude);
         }
 
-        axios
+        await axios
             .get(
-                `https://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_WEATHER_API_KEY}&q=${city}&q=${lat}&q=${lon}&days=7`
+                `https://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_WEATHER_API_KEY}&q=${lat}&q=${lon}&days=7`
             )
             .then((res) => {
                 setData({
