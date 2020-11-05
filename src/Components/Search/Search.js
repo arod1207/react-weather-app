@@ -60,8 +60,6 @@ function Search() {
                 `https://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_WEATHER_API_KEY}&q=${city}&q=${lat}&q=${lon}&days=7`
             )
             .then((res) => {
-                console.log('🔥', res.data);
-
                 setData({
                     city: res.data.location.name,
                     region: res.data.location.region,
